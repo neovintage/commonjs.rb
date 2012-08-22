@@ -31,7 +31,7 @@ module CommonJS
     private
 
     def find(module_id)
-      if loadpath = @paths.find { |path| path.join("#{module_id}.js").exist? }
+      if loadpath = @paths.find { |path| path.join("#{module_id}.js").exist? || path.join("#{module_id}/index.js").exist? }
         loadpath.join("#{module_id}.js")
       end
     end
