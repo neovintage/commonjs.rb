@@ -13,6 +13,7 @@ module CommonJS
     def require(module_id)
       unless mod = @modules[module_id]
         filepath = find(module_id) or fail LoadError, "no such module '#{module_id}'"
+        puts filepath
         load = @runtime.eval("(function(module, require, exports) {#{File.read(filepath)}})", filepath.expand_path.to_s)
         @modules[module_id] = mod = Module.new(module_id, self)
         load.call(mod, mod.require_function, mod.exports)
